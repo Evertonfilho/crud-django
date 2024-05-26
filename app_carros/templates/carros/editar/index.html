@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Carro</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .form-control {
+            background-color: #495057;
+            color: #f8f9fa;
+            border: 1px solid #6c757d;
+        }
+        .form-control::placeholder {
+            color: #ced4da;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .container {
+            background-color: #212529;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        label {
+            color: #f8f9fa;
+        }
+        .form-check-label {
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Editar Carro</h1>
+        <form action="{% url 'editar_carro' carro.id_carro %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="modelo">Modelo</label>
+                <input type="text" class="form-control" id="modelo" name="modelo" value="{{ carro.modelo }}" required>
+            </div>
+            <div class="form-group">
+                <label for="quantidade_portas">Quantidade de Portas</label>
+                <input type="number" class="form-control" id="quantidade_portas" name="quantidade_portas" value="{{ carro.quantidade_portas }}" required>
+            </div>
+            <div class="form-group">
+                <label for="tipo_combustivel">Tipo Combustível</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="gasolina" name="tipo_combustivel" value="gasolina" {% if carro.tipo_combustivel == 'gasolina' %}checked{% endif %} required>
+                        <label class="form-check-label" for="gasolina">Gasolina</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="etanol" name="tipo_combustivel" value="etanol" {% if carro.tipo_combustivel == 'etanol' %}checked{% endif %} required>
+                        <label class="form-check-label" for="etanol">Etanol</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="diesel" name="tipo_combustivel" value="diesel" {% if carro.tipo_combustivel == 'diesel' %}checked{% endif %} required>
+                        <label class="form-check-label" for="diesel">Diesel</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ano_carro">Ano</label>
+                <input type="number" class="form-control" id="ano_carro" name="ano_carro" value="{{ carro.ano_carro }}" required>
+            </div>
+            <div class="form-group">
+                <label for="placa">Placa</label>
+                <input type="text" class="form-control" id="placa" name="placa" value="{{ carro.placa }}" required>
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="novo" name="estado" value="novo" {% if carro.estado == 'novo' %}checked{% endif %} required>
+                        <label class="form-check-label" for="novo">Novo</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="seminovo" name="estado" value="seminovo" {% if carro.estado == 'seminovo' %}checked{% endif %} required>
+                        <label class="form-check-label" for="seminovo">Semi Novo</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="valor_comprado">Valor Comprado</label>
+                <input type="number" class="form-control" id="valor_comprado" name="valor_comprado" value="{{ carro.valor_comprado }}" required>
+            </div>
+            <div class="form-group">
+                <label for="valor_vendido">Valor Vendido</label>
+                <input type="number" class="form-control" id="valor_vendido" name="valor_vendido" value="{{ carro.valor_vendido }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar mudanças</button>
+            <a href="{% url 'mostrar_lista' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

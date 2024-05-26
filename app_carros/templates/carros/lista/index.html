@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Carros</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .table {
+            background-color: #454d55;
+        }
+        .table th, .table td {
+            color: #f8f9fa;
+        }
+        .navbar-light .navbar-nav .nav-link {
+            color: #f8f9fa;
+        }
+        .alert-danger {
+            background-color: #dc3545;
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Listar Carros</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'mostrar_lista' %}">Listar Veículos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Cadastrar Veículos</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Lista de Carros</h1>
+
+        <!-- Exibir Mensagem de Erro -->
+        {% if error_message %}
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
+        {% endif %}
+
+        <div class="mt-5">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Quantidade de Portas</th>
+                        <th>Tipo Combustível</th>
+                        <th>Ano</th>
+                        <th>Placa</th>
+                        <th>Estado</th>
+                        <th>Valor Comprado</th>
+                        <th>Valor Vendido</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for carro in carros %}
+                    <tr id="carro-{{ carro.id_carro }}">
+                        <td>{{ carro.modelo }}</td>
+                        <td>{{ carro.quantidade_portas }}</td>
+                        <td>{{ carro.tipo_combustivel }}</td>
+                        <td>{{ carro.ano_carro }}</td>
+                        <td>{{ carro.placa }}</td>
+                        <td>{{ carro.estado }}</td>
+                        <td>{{ carro.valor_comprado }}</td>
+                        <td>{{ carro.valor_vendido }}</td>
+                        <td>
+                            <a href="{% url 'editar_carro' carro.id_carro %}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{% url 'deletar_carro' carro.id_carro %}" class="btn btn-danger btn-sm">Deletar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
