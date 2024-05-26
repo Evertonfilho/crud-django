@@ -26,7 +26,6 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Listar Carros</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,14 +45,11 @@
 
     <div class="container mt-5">
         <h1 class="text-center">Lista de Carros</h1>
-
-        <!-- Exibir Mensagem de Erro -->
         {% if error_message %}
         <div class="alert alert-danger">
             {{ error_message }}
         </div>
         {% endif %}
-
         <div class="mt-5">
             <table class="table table-bordered">
                 <thead>
